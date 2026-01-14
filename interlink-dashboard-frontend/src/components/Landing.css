@@ -1,0 +1,62 @@
+/* Landing.css */
+
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 2rem;
+}
+
+.landing h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.landing p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.landing-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.landing-buttons a,
+.landing-buttons button {
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.landing-buttons .primary {
+    background: #fff;
+    color: #007bff;
+}
+
+.landing-buttons .primary:hover {
+    background: #f0f0f0;
+}
+
+.landing-buttons .secondary {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.landing-buttons .secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
