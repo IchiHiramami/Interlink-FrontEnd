@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import UserForm from './components/UserForm';
@@ -10,7 +10,13 @@ import { useAuth } from './context/AuthContext';
 import './assets/app.css'
 
 export default function App() {
-  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
+
 
   return (
     <div style={{ padding: 16 }}>
@@ -21,7 +27,7 @@ export default function App() {
         <Link to="/login">Log In</Link>
         <Link to="/list">Users</Link>
         <Link to="/update">Update</Link>
-        <button className="navbar-button">Logout</button>
+        <button className="navbar-button" onClick={handleLogOut}>Logout</button>
       </div>
     </nav>
 

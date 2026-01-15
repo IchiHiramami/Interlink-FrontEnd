@@ -17,7 +17,7 @@ export default function Login() {
         setError('');
         try {
             await login(email, password);
-        navigate('/list'); // redirect after login
+            navigate('/dashboard'); // redirect after login
         } catch (err) {
             setError(err.response?.data?.error || 'Login failed');
         } finally {

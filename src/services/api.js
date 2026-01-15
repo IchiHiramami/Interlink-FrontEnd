@@ -1,9 +1,8 @@
 import axios from 'axios';
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
 
-const API = axios.create({baseURL : API_BASE_URL});
+export const API = axios.create({ baseURL: API_BASE_URL });
 
-// attach tokens
 API.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) config.headers.Authorization = `Bearer ${token}`;
@@ -11,11 +10,16 @@ API.interceptors.request.use((config) => {
 })
 
 // Auth
-export const login = (email, password) => API.post('users/login', {email, password});
+export const login = (email, password) => API.post('/login', {email, password});
 
 // create users using POST
-export const createUser = (data) => API.post('/users/register', data);
+export const createUser = (data) => API.post('/register', data);
 
+// fetch user data in home
+export const getStats = () => API.get('/dashboard');
+
+
+// a bunch of stuff i probably might not use but is still there regardless
 // return users using GET
 export const getUsers = (email) => email ? API.get('/users', {params: {email}}): API.get('/users');
 
