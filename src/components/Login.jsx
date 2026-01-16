@@ -25,6 +25,10 @@ export default function Login() {
         }
     };
 
+    const signUp = () => {
+        navigate('/create');
+    };
+
     return (
         <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>
@@ -41,10 +45,11 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading}> 
                 {loading ? 'Logging in...' : 'Log In'}
             </button>
-            {error && <div className="error">{error}</div>}
+                {error && <div className="error">{error}</div>}
+            <button onClick={signUp} className='link-button'>Don't have an account? Create one here</button>
             </form>
         </div>
     );

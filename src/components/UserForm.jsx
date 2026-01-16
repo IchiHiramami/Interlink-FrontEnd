@@ -1,8 +1,11 @@
 import './UserForm.css'
 import { useState } from 'react';
 import { createUser } from '../services/api';
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserForm() {
+    const { register } = useAuth();
     const [form, setForm] = useState({
         email: '',
         firstName: '',
@@ -41,6 +44,8 @@ export default function UserForm() {
     const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
@@ -48,20 +53,24 @@ export default function UserForm() {
         setLoading(true);
 
         try {
-        const res = await createUser(form);
-        alert(`User created: ${res.data.firstName} ${res.data.lastName}`);
-        setForm({
-            email: '',
-            firstName: '',
-            lastName: '',
-            idNumber: '',
-            password: ''
-        });
-        setErrors({});
+            const res = await createUser(form);
+            alert(`User created: ${res.data.firstName} ${res.data.lastName}`);
+            setForm({
+                email: '',
+                firstName: '',
+                lastName: '',
+                idNumber: '',
+                password: ''
+            });
+            setErrors({});
+            const data = { email, password };
+            await register(data);
+            navigate('/dashboard');
+            
         } catch (err) {
-        alert(`Error: ${err.response?.data?.error || err.message}`);
+            alert(`Error: ${err.response?.data?.error || err.message}`);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 

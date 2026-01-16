@@ -1,6 +1,7 @@
 .dashboard-container {
   display: flex;
   min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sidebar {
@@ -8,6 +9,7 @@
   background: #2c3e50;
   color: #fff;
   padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sidebar h3 {
@@ -31,6 +33,7 @@
 .main-content {
   flex: 1;
   padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .stats-grid {

@@ -8,11 +8,10 @@ API.interceptors.request.use((config) => {
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config
 })
-
-// Auth
+// Auth with login
 export const login = (email, password) => API.post('/login', {email, password});
 
-// create users using POST
+// create users using POST with Auth
 export const createUser = (data) => API.post('/register', data);
 
 // fetch user data in home

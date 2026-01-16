@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { login as loginAPI } from '../services/api';
+import { login as loginAPI, createUser as registerAPI } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -24,6 +24,20 @@ export function AuthProvider({ children }) {
         });
     };
 
+    const register = async (data) => {
+        const res = await registerAPI(data);
+        const { token, user} = res.data;
+
+        localStorage.setItem('token', token)
+        console.log('token received')
+
+        setAuthState({
+            token,
+            user,
+            isAuthenticated: true
+        });
+    };
+
     const logout = () => {
         localStorage.removeItem('token');
         console.log('token removed')
@@ -35,7 +49,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value = {{ ...authState, login, logout}}>
+        <AuthContext.Provider value = {{ ...authState, login, register, logout}}>
             {children}
         </AuthContext.Provider>
     )
