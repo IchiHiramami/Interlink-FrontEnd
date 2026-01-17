@@ -4,6 +4,7 @@ import { login as loginAPI, createUser as registerAPI } from '../services/api';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+
     const [authState, setAuthState] = useState({
         token: localStorage.getItem('token') || null,
         user: null,
@@ -12,30 +13,32 @@ export function AuthProvider({ children }) {
 
     const login = async (email, password) => {
         const res = await loginAPI(email, password);
-        const { token, user } = res.data;
+        const { token, newUser } = res.data;
 
         localStorage.setItem('token', token)
         console.log('token received')
 
         setAuthState({
             token,
-            user,
+            user : newUser,
             isAuthenticated: true
         });
+        return { token, user: newUser };
     };
 
     const register = async (data) => {
         const res = await registerAPI(data);
-        const { token, user} = res.data;
+        const { token, newUser} = res.data;
 
         localStorage.setItem('token', token)
         console.log('token received')
 
         setAuthState({
             token,
-            user,
+            user : newUser,
             isAuthenticated: true
         });
+        return { token, user: newUser };
     };
 
     const logout = () => {

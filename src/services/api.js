@@ -8,6 +8,9 @@ API.interceptors.request.use((config) => {
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config
 })
+
+// API.interceptors.response.use((res) => res.data);
+
 // Auth with login
 export const login = (email, password) => API.post('/login', {email, password});
 

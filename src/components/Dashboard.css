@@ -49,3 +49,34 @@
   flex: 1;
   text-align: center;
 }
+
+.profile-form {
+  max-width: 400px;
+  margin-top: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+button {
+  padding: 10px 15px;
+  background: #2c3e50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.status-message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+

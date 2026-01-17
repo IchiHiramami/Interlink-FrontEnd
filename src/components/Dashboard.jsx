@@ -2,9 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { API } from '../services/api';
+import { useNavigate  } from 'react-router-dom';
 import './Dashboard.css';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [stats, setStats] = useState(null);
 
@@ -17,8 +19,24 @@ export default function Dashboard() {
         console.error('Failed to load stats', err);
       }
     };
+
+    const load = async () => {
+      await API.get('/dashboard');
+    }
     fetchStats();
   }, []);
+
+  const switchProfile = () => {
+    navigate('/profile')
+  }
+
+  const switchSettings = () => {
+    navigate('/settings')
+  }
+
+  const switchStats = () => {
+    navigate('/stats')
+  }
 
   return (
     <div className="dashboard-container">
@@ -28,9 +46,9 @@ export default function Dashboard() {
         <p>{user?.email}</p>
         <nav>
           <ul>
-            <li>Profile</li>
-            <li>Stats</li>
-            <li>Settings</li>
+            <li onClick={switchProfile}>Profile</li>
+            <li onClick={switchStats}>Stats</li>
+            <li onClick={switchSettings}>Settings</li>
             <li onClick={logout} className="logout">Logout</li>
           </ul>
         </nav>
@@ -45,12 +63,12 @@ export default function Dashboard() {
         ) : (
           <div className="stats-grid">
             <div className="card">
-              <h3>Submissions</h3>
-              <p>{stats.submissions}</p>
+              <h3>GroupName</h3>
+              <p>{stats.groupName || 'No assigned group '}</p>
             </div>
             <div className="card">
-              <h3>Last Login</h3>
-              <p>{new Date(stats.lastLogin).toLocaleString()}</p>
+              <h3>Progress</h3>
+              <p>{stats.groupProgress}</p>
             </div>
             <div className="card">
               <h3>Role</h3>
