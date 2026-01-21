@@ -15,10 +15,16 @@ API.interceptors.request.use((config) => {
 export const login = (email, password) => API.post('/login', {email, password});
 
 // create users using POST with Auth
-export const createUser = (data) => API.post('/register', data);
+export const createUser = (data) => {API.post('/register', data); console.log('Front-end has attempted to register')};
 
-// fetch user data in home
-export const getStats = () => API.get('/dashboard');
+// fetch user stat data in home
+export const getCurrentUser = () => API.get('/dashboard');
+
+// post tasks at this time
+export const postTask = (taskData) => API.post('/tasks', taskData);
+
+// fetch tasks available
+export const getTasks = () => API.get('/tasks');
 
 
 // a bunch of stuff i probably might not use but is still there regardless
